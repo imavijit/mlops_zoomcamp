@@ -1,0 +1,80 @@
+Important Concepts:
+1. ML experiment: the process of building an ML model
+2. Experiment run: each trial in an ML experiment
+3. Run artifact: any file that is associated with an ML run
+4. Experiment meatadata
+
+
+Experiment Tracking:
+Keeping track of all the relevant information from an ML experiment,which includes:
+1. Source Code
+2. Environment
+3. Data
+4. Model
+5. Hyperparameters
+6. Metrics
+7. ...
+
+-> Experiment tracking is important because of 3 main reasons
+   1. Reproducibility  2. Organization   3. Optimization
+
+-> MLflow (Open source platform for machine learning lifecycle): Python Package. Can be installed with pip.
+   It contains 4 main modules:
+   1. Tracking
+   2. Models
+   3. Model Registry
+   4. Projects
+
+-> Tracking experiment with MLflow
+
+   The MLflow Tracking module allows you to organize your experiments into runs, and to keep track of:
+   1. Parameters    2.Metrics    3.Meatadata    4.Artifacts     5.Models
+
+   Along with this information, MLflow automatically logs extra information about the run:
+   1. Source code     2.Version of the code(git commit)    3. Start and end time      4.Author
+
+
+
+
+
+-> To use mlflow first we need to mention our database. We can do this using the below command:
+                   mlflow ui --backend-store-uri sqlite:///mlflow.db
+This tells mlflow that we want to store all teh artifacts and metadata in sqlite.
+-> To access previous experiments run the above command inside the folder where 'mlflow.db' is located
+
+
+Code to import and use now:
+                          import mlflow
+                          mlflow.set_tracking_uri("sqlite:///mlflow.db")
+                          mlflow.set_experiment("name")
+
+
+
+
+=> Model Management:
+
+Logging models in MLfllow:
+
+Two options:
+ 1. Log model as an artifact
+    
+            mlflow.log_artifact(local_path="mymodel", artifact_path="models/")
+ 
+       e.g: mlflow.log_artifact(local_path='models/preprocessor.b', artifact_path='preprocessor')
+
+ 
+ 2.Log model using the method log_model
+ 
+            mlflow.<framework>.log_model(model, artifact_path = "model/")
+           
+       e.g: mlflow.xgboost.log_model(booster, artifact_path ='models_mlflow')
+
+
+
+
+
+
+
+
+
+
